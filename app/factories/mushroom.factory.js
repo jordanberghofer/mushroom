@@ -4,7 +4,12 @@
 //giving it a name, this must be consistnet with what we inject to the controller
 //and passing a function, whose parameters are its dependencies
 
-app.factory("mushroomFactory", function($q, $http){
+app.factory("mushroomFactory", function($q, $http, FBCreds){
+
+    //put URL into a variable
+    const url = FBCreds.databaseURL;
+    console.log(FBCreds.databaseURL);
+
 
     //helper function to process the data fron getMushrooms into and array of objects
     //that we can pass back to the controller
@@ -17,7 +22,7 @@ app.factory("mushroomFactory", function($q, $http){
         //It litereally reads as Object.keys(data.data.mushrooms as an array
 
         //alltogether it functions as "push the value of each key into a new array"
-        return Object.keys(data.data.mushrooms).map(key => data.data.mushrooms[key]);
+        return Object.keys(data.data).map(key => data.data[key]);
         //this can be typed out the old way as ...
         // let array = [];
         // Object.keys(data.data.mushrooms).forEach(key => {
@@ -33,7 +38,7 @@ app.factory("mushroomFactory", function($q, $http){
     const getMushrooms = function(){
         console.log("you called me?");
         return $q((resolve, reject) => {
-            $http.get('mushrooms.json')
+            $http.get(`${url}/mushrooms.json`)
                 .then(data => resolve(makeMushArray(data)))
                 .catch(error => reject (error));
         });

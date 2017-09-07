@@ -25,8 +25,4 @@ app.controller("mushroomCtrl", function($scope, mushroomFactory){
     };
     showMushrooms();
 
-
-
-
-
 });
