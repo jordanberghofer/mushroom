@@ -1,17 +1,17 @@
 <h2>Mushrooms in this BIATCH!!!!</h2>
 
-<input ng-model="searchInput" type="text" placeholder="Input Mushrooms Here!"><br>
+<input ng-model="searchText" type="text" autofocus="true"  placeholder="Search Mushrooms by Name!!!" size="25" ><br>
 
 <input type="radio" ng-model="edible" value="true">Edible
 <input type="radio" ng-model="poisonous" value="false">Poisonous
 
 
 <!-- shroom refers to an individual item (object) in the array of objects which we bound to $scope as 'shrooms' in mushroomCtrl -->
-<div ng-repeat="shroom in shrooms">
+<div ng-repeat="shroom in shrooms | filter: {name:searchText}">
 
     <h1>{{shroom.name}}</h1>
     <h3>edible: {{shroom.edible}}</h3>
     <p>description: {{shroom.description}}</p>
-    
+
 </div>
 
